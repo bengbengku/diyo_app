@@ -49,6 +49,8 @@ const AsideRight = ({ setActive, setIsActiveSmall, setTables }: Props) => {
     dispatch({ type: "ADD_TABLES", payload: update });
     dispatch({ type: "GET_TABLE", payload: updateStatus });
     setTables(update);
+    setActive("Home");
+    setIsActiveSmall(0);
   }
 
   return (
