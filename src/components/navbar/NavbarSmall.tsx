@@ -9,6 +9,7 @@ import {
 import { navbarSmallStyles } from "@/styles/navbar/navbarSmallStyles";
 import { NavbarSmallLinkData } from "@/types/navbar";
 import img from "@/assets/diyo_small.png";
+import { useDispatch } from "react-redux";
 
 interface NavbarSmallProps {
   isActiveSmall: number;
@@ -40,6 +41,7 @@ const NavbarSmall = ({
   setVisible,
   setActive,
 }: NavbarSmallProps) => {
+  const dispatch = useDispatch();
   const { classes, cx } = navbarSmallStyles();
 
   const links = mockdata.map((link, index) => (
@@ -62,6 +64,10 @@ const NavbarSmall = ({
       setActive("Menu");
     }
     setIsActiveSmall(index);
+  }
+
+  function handleLogout() {
+    dispatch({ type: "LOGOUT" });
   }
 
   return (
@@ -90,7 +96,7 @@ const NavbarSmall = ({
       <Navbar.Section>
         <Stack justify="center" spacing={0}>
           <NavbarLink icon={IconSwitchHorizontal} label="Change account" />
-          <NavbarLink icon={IconLogout} label="Logout" />
+          <NavbarLink icon={IconLogout} label="Logout" onClick={handleLogout} />
         </Stack>
       </Navbar.Section>
     </Navbar>
