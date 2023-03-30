@@ -18,7 +18,6 @@ const Dashboard = () => {
   const [tables, setTables] = useState<tableInterface[]>(tableSeed);
   const seeds: tableInterface[] = useSelector((state: any) => state.tables);
 
-  console.log(active, isActiveSmall);
   return (
     <div className="dashboard-container">
       <div className="navbar">
