@@ -11,7 +11,7 @@ export function getOrders(state: ProductsInterface[] | [] = [], action: Action) 
       return action.payload;
 
     case "REMOVE_ORDERS":
-      return null;
+      return [];
 
     default:
       return state;

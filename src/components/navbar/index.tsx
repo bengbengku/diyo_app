@@ -9,6 +9,7 @@ import {
   IconArrowBigLeftLinesFilled,
 } from "@tabler/icons-react";
 import { NavbarLinkData } from "@/types/navbar";
+import { useDispatch } from "react-redux";
 
 interface PropsNavbarComponent {
   active: string;
@@ -30,6 +31,7 @@ const NavbarComponent = ({
   setIsActiveSmall,
 }: PropsNavbarComponent) => {
   const { classes, cx } = navbarStyles();
+  const dispatch = useDispatch();
   const links = data.map((item: NavbarLinkData) => (
     <a
       className={cx(classes.link, { [classes.linkActive]: item.label === active })}
@@ -56,6 +58,11 @@ const NavbarComponent = ({
     }
   }
 
+  function handleLogout(e: any) {
+    e.preventDefault();
+    dispatch({ type: "LOGOUT" });
+  }
+
   return (
     <Navbar height={700} width={{ sm: 300 }} p="md" className={classes.navbar}>
       <Navbar.Section grow>
@@ -74,7 +81,7 @@ const NavbarComponent = ({
           <span>Change account</span>
         </a>
 
-        <a href="#" className={classes.link} onClick={(event) => event.preventDefault()}>
+        <a href="#" className={classes.link} onClick={handleLogout}>
           <IconLogout className={classes.linkIcon} stroke={1.5} />
           <span>Logout</span>
         </a>

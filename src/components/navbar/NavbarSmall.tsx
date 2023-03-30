@@ -1,4 +1,4 @@
-import { Navbar, Center, Tooltip, UnstyledButton, createStyles, Stack, rem } from "@mantine/core";
+import { Navbar, Center, Tooltip, UnstyledButton, Stack } from "@mantine/core";
 import {
   IconHome2,
   IconCheckbox,
@@ -6,7 +6,6 @@ import {
   IconLogout,
   IconSwitchHorizontal,
 } from "@tabler/icons-react";
-import { MantineLogo } from "@mantine/ds";
 import { navbarSmallStyles } from "@/styles/navbar/navbarSmallStyles";
 import { NavbarSmallLinkData } from "@/types/navbar";
 import img from "@/assets/diyo_small.png";
@@ -15,6 +14,7 @@ interface NavbarSmallProps {
   isActiveSmall: number;
   setIsActiveSmall: (val: number) => void;
   setVisible: (val: number) => void;
+  setActive: (val: string) => void;
 }
 
 function NavbarLink({ icon: Icon, label, active, onClick }: NavbarSmallLinkData) {
@@ -34,7 +34,12 @@ const mockdata = [
   { icon: IconCategory, label: "Menu" },
 ];
 
-const NavbarSmall = ({ isActiveSmall, setIsActiveSmall, setVisible }: NavbarSmallProps) => {
+const NavbarSmall = ({
+  isActiveSmall,
+  setIsActiveSmall,
+  setVisible,
+  setActive,
+}: NavbarSmallProps) => {
   const { classes, cx } = navbarSmallStyles();
 
   const links = mockdata.map((link, index) => (
@@ -42,9 +47,22 @@ const NavbarSmall = ({ isActiveSmall, setIsActiveSmall, setVisible }: NavbarSmal
       {...link}
       key={link.label}
       active={index === isActiveSmall}
-      onClick={() => setIsActiveSmall(index)}
+      onClick={() => handleClick(index)}
     />
   ));
+
+  function handleClick(index: number) {
+    if (index === 0) {
+      setActive("Home");
+    }
+    if (index === 1) {
+      setActive("Order Queue");
+    }
+    if (index === 2) {
+      setActive("Menu");
+    }
+    setIsActiveSmall(index);
+  }
 
   return (
     <Navbar
